@@ -3,7 +3,7 @@ DNS changer shell script
 <br>
 You can change your DNS settings with that script easily.
 <br>
-![Usage]()
+![Usage](https://github.com/nxjosephofficial/nxjosephofficial/blob/main/dns-changer.gif)
 <br>
 Works on distros which use systemd and NetworkManager.
 <br>
