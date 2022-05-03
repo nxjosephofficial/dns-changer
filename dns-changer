@@ -14,7 +14,7 @@ ${TITLE}Best Free & Public DNS Servers${NC}
 ${NUM}1. ${NAME}Google   ${ADR}8.8.8.8 8.8.4.4${NC}
 ${NUM}2. ${NAME}Quad9    ${ADR}9.9.9.9 149.112.112.112${NC}
 ${NUM}3. ${NAME}OpenDNS Home ${ADR}208.67.222.222  208.67.220.220${NC}
-${NUM}4. ${NAME}Cloudflare  ${ADR}1.1.1.1 1.0.0.1${NC}
+${NUM}4. ${NAME}Cloudflare  ${ADR}1.1.1.1 1.0.0.1${NC}\n
 "
 printf "${TITLE}Select one of them by name or numbers:${NC}\n"
 read which
