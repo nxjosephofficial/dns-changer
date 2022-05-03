@@ -1,0 +1,68 @@
+#!/bin/bash
+NAME='\033[1;34m'
+ADR='\033[0;33m'
+NC='\033[0;0m'
+TITLE='\033[1;32m'
+NUM='\033[1;36m'
+ALERT='\033[1;31m'
+LPURP='\033[1;35m'
+printf "${TITLE}Do you want to change your DNS?\n${LPURP}Y or N\n${NC}"
+read f 
+if [[ "$f" == "Y" || "$f" == "y" ]]; then
+printf "
+${TITLE}Best Free & Public DNS Servers${NC}
+${NUM}1. ${NAME}Google   ${ADR}8.8.8.8 8.8.4.4${NC}
+${NUM}2. ${NAME}Quad9    ${ADR}9.9.9.9 149.112.112.112${NC}
+${NUM}3. ${NAME}OpenDNS Home ${ADR}208.67.222.222  208.67.220.220${NC}
+${NUM}4. ${NAME}Cloudflare  ${ADR}1.1.1.1 1.0.0.1${NC}
+"
+printf "${TITLE}Select one of them by name or numbers:${NC}\n"
+read which
+if [[ "$which" == "1" || "$which" == "Google" ]]; then
+printf "Taking backup of /etc/resolv.conf as /etc/resolv.conf.backup\n"
+sudo cp /etc/resolv.conf /etc/resolv.conf.backup
+printf "Changing...\n"
+sudo chattr -i /etc/resolv.conf
+printf "nameserver 8.8.8.8\nnameserver 8.8.4.4\n" | sudo tee /etc/resolv.conf > /dev/null
+sudo chattr +i /etc/resolv.conf
+printf "Changed!\nNow restarting NetworkManager...\n"
+sudo systemctl restart NetworkManager
+printf "Restarted.\nDone!"
+elif [[ "$which" == "2" || "$which" == "Quad9" ]]; then
+printf "Taking backup of /etc/resolv.conf as /etc/resolv.conf.backup\n"
+sudo cp /etc/resolv.conf /etc/resolv.conf.backup
+printf "Changing...\n"
+sudo chattr -i /etc/resolv.conf
+printf "nameserver 9.9.9.9\nnameserver 149.112.112.112\n" | sudo tee /etc/resolv.conf > /dev/null
+sudo chattr +i /etc/resolv.conf
+printf "Changed!\nNow restarting NetworkManager...\n"
+sudo systemctl restart NetworkManager
+printf "Restarted.\nDone!"
+elif [[ "$which" == "3" || "$which" == "OpenDNS Home" ]]; then
+printf "Taking backup of /etc/resolv.conf as /etc/resolv.conf.backup\n"
+sudo cp /etc/resolv.conf /etc/resolv.conf.backup
+printf "Changing...\n"
+sudo chattr -i /etc/resolv.conf
+printf "nameserver 208.67.222.222\nnameserver 208.67.220.220\n" | sudo tee /etc/resolv.conf > /dev/null
+sudo chattr +i /etc/resolv.conf
+printf "Changed!\nNow restarting NetworkManager...\n"
+sudo systemctl restart NetworkManager
+printf "Restarted.\nDone!"
+elif [[ "$which" == "4" || "$which" == "Cloudflare" ]]; then
+printf "Taking backup of /etc/resolv.conf as /etc/resolv.conf.backup\n"
+sudo cp /etc/resolv.conf /etc/resolv.conf.backup
+printf "Changing...\n"
+sudo chattr -i /etc/resolv.conf
+printf "nameserver 1.1.1.1\nnameserver 1.0.0.1\n" | sudo tee /etc/resolv.conf > /dev/null
+sudo chattr +i /etc/resolv.conf
+printf "Changed!\nNow restarting NetworkManager...\n"
+sudo systemctl restart NetworkManager
+printf "Restarted.\nDone!"
+else 
+printf "${ALERT}Oops, something went wrong.${NC}\n"
+fi
+elif [[ "$f" == "N" || "$f" == "n" ]]; then
+printf "${ALERT}Exiting...${NC}\n"
+else 
+printf "${ALERT}Oops, something went wrong.${NC}\n"
+fi
